@@ -11,26 +11,25 @@ We'll pass strings with varying formats, such as "racecar", "RaceCar", and "race
 We'll also pass strings with special symbols, such as "2A3*3a2", "2A3 3a2", and "2_A3*3#A2".
 */
 
-function palindrome(str) {
-  var cleanStr = str.toLowerCase().replace(/\s+|\W|[_]/g, '');
-  var reverseStr = cleanStr.split('').reverse().join('');
-  if (reverseStr === cleanStr) {
-    return true;
-  } else {
-    return false;
+function checkForPalindrome(word) {
+  const cleanedWord = word.replace(/[^A-Za-z]/g, '').trim().toLowerCase()
+  const reversedWord = cleanedWord.split("").reverse().join('');
+  if(cleanedWord === reversedWord){
+    return true
   }
+  return false
 }
 
-palindrome("rss*a_c#e caR");
-palindrome("eye");   // true
-palindrome("_eye");   // true
-palindrome("race car");   // true
-palindrome("not a palindrome");   // false
-palindrome("A man, a plan, a canal. Panama");   // true
-palindrome("never odd or even");   // true
-palindrome("nope");   // false
-palindrome("almostomla");   // false
-palindrome("My age is 0, 0 si ega ym.");   // true
-palindrome("1 eye for of 1 eye.");   // false
-palindrome("0_0 (: /-\ :) 0-0");   // true
-palindrome("five|\_/|four");   // false
+checkForPalindrome("rss*a_c#e caR");
+checkForPalindrome("eye");   // true
+checkForPalindrome("_eye");   // true
+checkForPalindrome("race car");   // true
+checkForPalindrome("not a palindrome");   // false
+checkForPalindrome("A man, a plan, a canal. Panama");   // true
+checkForPalindrome("never odd or even");   // true
+checkForPalindrome("nope");   // false
+checkForPalindrome("almostomla");   // false
+checkForPalindrome("My age is 0, 0 si ega ym.");   // true
+checkForPalindrome("1 eye for of 1 eye.");   // true
+checkForPalindrome("0_0 (: /-\ :) 0-0");   // true
+checkForPalindrome("five|\_/|four");   // false
