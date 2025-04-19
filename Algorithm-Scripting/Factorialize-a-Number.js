@@ -8,15 +8,12 @@ Factorials are often represented with the shorthand notation n!
 For example: 5! = 1 * 2 * 3 * 4 * 5 = 120
 */
 
-function factorialize(num) {
-  if (num === 0) {
-    return 1;
-  } else {
-    return num * factorialize(num - 1);
-  }
+function findFactorialNr(n) {
+if (n <= 0) return 1;
+return n * findFactorialNr(n - 1)
 }
 
-factorialize(5);   // 120
-factorialize(10);   // 3628800
-factorialize(20);   // 2432902008176640000
-factorialize(0);   // 1
+findFactorialNr(5);   // 120
+findFactorialNr(10);   // 3628800
+findFactorialNr(20);   // 2432902008176640000
+findFactorialNr(0);   // 1
