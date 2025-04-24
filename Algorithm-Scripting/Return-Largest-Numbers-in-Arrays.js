@@ -6,19 +6,44 @@ Remember, you can iterate through an array with a simple for loop, and access ea
 */
 
 function largestOfFour(arr) {
-  var newArray = [];
-  for (i=0; i<arr.length; i++) {
-    var largestNr = 0;
-    for (j=0; j<arr[i].length; j++) {
-      if (arr[i][j] > largestNr) {
-        largestNr = arr[i][j];
+  const results = [];
+  for (let i = 0; i <= arr.length; i++) {
+    const subArr = arr[i];
+    let biggestVal = subArr[0];
+    for (j = 0; j < subArr.length; j++) {
+      const currentEl = subArr[j];
+      if (currentEl > biggestVal) {
+        biggestVal = currentEl;
       }
     }
-    newArray.push(largestNr);
+    results.push(biggestVal);
   }
-  return newArray;
+  return results;
 }
 
-largestOfFour([[4, 5, 1, 3], [13, 27, 18, 26], [32, 35, 37, 39], [1000, 1001, 857, 1]]);   // [5,27,39,1001]
-largestOfFour([[13, 27, 18, 26], [4, 5, 1, 3], [32, 35, 37, 39], [1000, 1001, 857, 1]]);   // [27,5,39,1001]
-largestOfFour([[4, 9, 1, 3], [13, 35, 18, 26], [32, 35, 97, 39], [1000000, 1001, 857, 1]]);   // [9, 35, 97, 1000000]
+function largestOfFourSecond(arr) {
+  const result = arr.map((el) => {
+    return el.reduce((acc, currVal) => {
+      return acc > currVal ? acc : currVal;
+    });
+  });
+  return result;
+}
+largestOfFour([
+  [4, 5, 1, 3],
+  [13, 27, 18, 26],
+  [32, 35, 37, 39],
+  [1000, 1001, 857, 1],
+]); // [5,27,39,1001]
+largestOfFour([
+  [13, 27, 18, 26],
+  [4, 5, 1, 3],
+  [32, 35, 37, 39],
+  [1000, 1001, 857, 1],
+]); // [27,5,39,1001]
+largestOfFour([
+  [4, 9, 1, 3],
+  [13, 35, 18, 26],
+  [32, 35, 97, 39],
+  [1000000, 1001, 857, 1],
+]); // [9, 35, 97, 1000000]
