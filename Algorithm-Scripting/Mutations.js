@@ -9,22 +9,25 @@ Lastly, ["Alien", "line"], should return true because all of the letters in "lin
 */
 
 function mutation(arr) {
-  var firstWord = arr[0].toLowerCase();
-  var secondWord = arr[1].toLowerCase();
-  for (i=0; i<secondWord.length; i++) {
-    if (firstWord.indexOf(secondWord[i]) == -1) {
-      return false;
-    }
-  }
-  return true;
+  const secondArr = arr[1].toLowerCase().split('');
+  const letter = secondArr.find((el) => {
+    return !arr[0].includes(el);
+  });
+  return letter === undefined;
 }
 
-mutation(["hello", "hey"]);   // false
-mutation(["hello", "Hello"]);   // true
-mutation(["zyxwvutsrqponmlkjihgfedcba", "qrstu"]);   // true
-mutation(["Mary", "Army"]);   // true
-mutation(["Mary", "Aarmy"]);   // true
-mutation(["Alien", "line"]);   // true
-mutation(["floor", "for"]);   // true
-mutation(["hello", "neo"]);   // false
-mutation(["voodoo", "no"]);   // false
+function mutationSecond(arr) {
+  const lowerCasedArr = arr.map((el) => el.toLowerCase());
+  const [first, second] = lowerCasedArr;
+  const secondArr = second.split('');
+  return secondArr.every((letter) => first.includes(letter));
+}
+
+mutation(['hello', 'Hello']); // true
+mutation(['zyxwvutsrqponmlkjihgfedcba', 'qrstu']); // true
+mutation(['Mary', 'Army']); // true
+mutation(['Mary', 'Aarmy']); // true
+mutation(['Alien', 'line']); // true
+mutation(['floor', 'for']); // true
+mutation(['hello', 'neo']); // false
+mutation(['voodoo', 'no']); // false
