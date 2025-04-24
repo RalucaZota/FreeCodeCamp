@@ -7,9 +7,24 @@ Your result must be a string.
 */
 
 function reverseString(str) {
-  return str.split('').reverse().join('');
+  const arr = str.split("").reverse().join("");
+  return arr;
 }
 
-reverseString("hello");   // "olleh"
+reverseString("Greetings from Earth");  // "olleh"
 reverseString("Howdy");   // "ydwoH"
 reverseString("Greetings from Earth");   // "htraE morf sgniteerG"
+
+
+function reverseStringSecond(str){
+  const arr = str.split("")
+  const newArr = [];
+  for(let i = arr.length - 1; i >= 0; i--){
+    newArr.push(arr[i]) 
+  }
+  const newStr = newArr.join("")
+  return newStr
+  
+}
+reverseStringSecond("Greetings from Earth");;
+reverseStringSecond("Howdy");
