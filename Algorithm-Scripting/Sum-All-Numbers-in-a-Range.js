@@ -5,17 +5,13 @@ The lowest number will not always come first.
 */
 
 function sumAll(arr) {
-  var lgNr = Math.max.apply(null, arr);
-  var smNr = Math.min.apply(null, arr);
-  var sortedArr = [smNr, lgNr];
-  var allNumbers = [];
-  while (smNr <= lgNr) {
-    allNumbers.push(smNr);
-    smNr += 1;
+  const minVal = Math.min(...arr);
+  const maxVal = Math.max(...arr);
+  let sum = 0;
+  for(let i = minVal; i <= maxVal; i++){
+    sum += i
   }
-  return allNumbers.reduce(function(total, currentValue) {
-    return total + currentValue;
-  });
+  return sum
 }
 
 sumAll([5, 10]);   // 45
