@@ -7,23 +7,25 @@ For example, 2 is a prime number because it's only divisible by one and two.
 The provided number may not be a prime.
 */
 
-function sumPrimes(num) {
-  var sum = 0;
-  var a = true;
-  for (i=2; i<=num; i++){
-    a = true;
-    for (j=2; j<=i/2; j++){
-      if (i % j === 0){
-        a = false;
-        break;
-      }
+function isPrime(num) {
+  if (num <= 1) return false;
+  for (let i = 2; i <= Math.sqrt(num); i++) {
+    if (num % i === 0) {
+      return false;
     }
-    if (a === true) {
+  }
+  return true;
+}
+
+function sumPrimes(num) {
+  let sum = 0;
+  for (let i = 2; i <= num; i++) {
+    if (isPrime(i)) {
       sum += i;
     }
   }
   return sum;
 }
 
-sumPrimes(10);   // 17
-sumPrimes(977);   // 73156
+sumPrimes(10); // 17
+sumPrimes(977); // 73156
