@@ -10,23 +10,31 @@ For example, for the input GCG, return [["G", "C"], ["C","G"],["G", "C"]]
 The character and its pair are paired up in an array, and all the arrays are grouped into one encapsulating array.
 */
 
+
 function pairElement(str) {
-  var strArr = str.split('');
-  var result = [];
-  for (i=0; i<strArr.length; i++){
-    var smArr = [];
-    if (strArr[i] === 'A'){
-      smArr.push(strArr[i], 'T');
-    } else if (strArr[i] === 'T'){
-      smArr.push(strArr[i], 'A');
-    } else if (strArr[i] === 'C'){
-      smArr.push(strArr[i], 'G');
-    } else if (strArr[i] === 'G'){
-      smArr.push(strArr[i], 'C');
+  const arr = [...str];
+  let newArr = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === "A") {
+      newArr.push([arr[i], "T"]);
+    } else if (arr[i] === "T") {
+      newArr.push([arr[i], "A"]);
+    } else if (arr[i] === "C") {
+      newArr.push([arr[i], "G"]);
+    } else if (arr[i] === "G") {
+      newArr.push([arr[i], "C"]);
     }
-    result.push(smArr);
   }
-  return result;
+  return newArr;
+}
+
+function pairElementTwo(str) {
+  const arr = [...str];
+  const dictionary = { A: "T", T: "A", C: "G", G: "C" };
+  const updatedArr = arr.map((el) => {
+    return [el, dictionary[el]];
+  });
+  return updatedArr;
 }
 
 pairElement("ATCGA");   // [["A","T"],["T","A"],["C","G"],["G","C"],["A","T"]]
