@@ -9,21 +9,20 @@ Input strings are guaranteed to be English words in all lowercase.
 */
 
 function translatePigLatin(str) {
-  var strArr = str.split('');
-  var newArr = [];
-  var vowels = ['a', 'e', 'i', 'o', 'u'];
-  for (i=0; i<strArr.length; i++){
-    if (vowels.indexOf(strArr[0]) !== -1){
-      strArr.push('w', 'a', 'y');
-      return strArr.join('');
-    } else if(vowels.indexOf(strArr[i]) !== -1){
-      return strArr.slice(i).concat(strArr.slice(0, i)).join('')+'ay';
-    }
+  const vowels = ['a', 'e', 'i', 'o', 'u'];
+  const arr = [...str];
+  const index = arr.findIndex((el) => vowels.includes(el));
+  if (index === 0) {
+    return str + 'way';
+  }
+  else {
+   const cuttedArr = arr.slice(index)
+   const cuttedLetter = arr.slice(0, index)
+   return [...cuttedArr, ...cuttedLetter].join("") + 'ay'
   }
 }
-
-translatePigLatin("california");   // "aliforniacay"
-translatePigLatin("paragraphs");   // "aragraphspay"
-translatePigLatin("glove");   // "oveglay"
-translatePigLatin("algorithm");   // "algorithmway"
-translatePigLatin("eight");   // "eightway"
+// translatePigLatin("california");   // "aliforniacay"
+// translatePigLatin("paragraphs");   // "aragraphspay"
+// translatePigLatin('glove'); // "oveglay"
+// translatePigLatin("algorithm");   // "algorithmway"
+// translatePigLatin("eight");   // "eightway"
