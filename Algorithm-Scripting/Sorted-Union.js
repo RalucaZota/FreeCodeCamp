@@ -11,17 +11,10 @@ sorted in numerical order.
 Check the assertion tests for examples.
 */
 
-function uniteUnique(arr) {
-  var allArguments = arr.slice.call(arguments);
-  var total = [];
-  allArguments.filter(function(current){
-    current.filter(function(number){
-      if (total.indexOf(number) == -1){
-        total.push(number);
-      }
-    });
-  });
-  return total;
+function uniteUnique(...arr) {
+  const flatedArr = arr.flat();
+  const uniqueArr = [...new Set(flatedArr)];
+  return uniqueArr
 }
 
 uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1]);   // [1, 3, 2, 5, 4]
