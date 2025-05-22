@@ -9,14 +9,12 @@ then the addition of the three dots does not add to the string length in determi
 */
 
 function truncateString(str, num) {
+  const dots = "...";
   if (str.length > num) {
-    var newString = '';
-    if (num <= 3) {
-      newString = str.slice(0, num) + '...';
-      return newString;
-    } else {
-      newString = str.slice(0, num-3) + '...';
-      return newString;
+    if (num > 3) {
+      return str.slice(0, num - 3) + dots;
+    } else if (num <= 3) {
+      return str.slice(0, num) + dots;
     }
   }
   return str;
