@@ -10,15 +10,9 @@ like [3,5,20] and 19 is less than 20 (index 2) and greater than 5 (index 1).
 */
 
 function getIndexToIns(arr, num) {
-  var sortedArr = arr.sort(function(a, b) {
-    return (a - b);
-  });
-  for (i=0; i<sortedArr.length; i++) {
-    if (num <= sortedArr[i]) {
-      return i;
-    }
-  }
-  return sortedArr.length;
+    arr.push(num);
+    const orderedArr = arr.sort((a, b) => a - b);
+    return orderedArr.indexOf(num)
 }
 
 getIndexToIns([40, 60], 80);   // 2
