@@ -1,129 +1,21 @@
-$(document).ready(function(){
+const textInput = document.querySelector('#my-work-input');
+const startIcon = document.querySelector('.fa.fa-play');
+const pauseIcon = document.querySelector('.fa.fa-pause');
+const clockTimer = document.querySelector('#clock-text');
+let timeInSeconds = 25 * 60;
 
-  changeModifiers()
-  startStopClock()
+function startClock() {
+  console.log('start clock');
+  setInterval(() => {
+    const dateObj = new Date(timeInSeconds-- * 1000);
+    console.log(dateObj);
 
-})
-
-var startOrStop = true
-var work = true
-var timer // this is the timer
-
-function changeModifiers() {
-
-  $('.break .minus, .break .plus, .session .minus, .session .plus').on('click', function() {
-    var content = parseInt($(this).parent().siblings('.modifiers-time').text())
-    // for class break
-    if ($(this).parent().parent().hasClass('break')){
-      if ($(this).hasClass('minus')){
-        $('.break .modifiers-time').html(content-1)
-        if (content <= 1){
-          $('.break .modifiers-time').html(1)
-        }
-      }
-      if ($(this).hasClass('plus')){
-        $('.break .modifiers-time').html(content+1)
-        if (content >= 10){
-          $('.break .modifiers-time').html(10)
-        }
-      }
-    }
-    // for class session
-    if($(this).parent().parent().hasClass('session')){
-      if ($(this).hasClass('minus')){
-        $('.session .modifiers-time').html(content-5)
-        $('#clock-text').html(content-5 + ":00")
-        if (content <= 5) {
-          $('.session .modifiers-time').html(5)
-          $('#clock-text').html(5 + ":00")
-        }
-        if (!startOrStop) {
-          clearInterval(timer)
-          startOrStop = true
-        }
-        work = true
-        $('.clock').css('background-color', '#80b771')
-      }
-      if ($(this).hasClass('plus')){
-        $('.session .modifiers-time').html(content+5)
-        $('#clock-text').html(content+5 + ":00")
-        if (content >= 60) {
-          $('.session .modifiers-time').html(60)
-          $('#clock-text').html(60 + ":00")
-        }
-        if (!startOrStop) {
-          clearInterval(timer)
-          startOrStop = true
-        }
-        work = true
-        $('.clock').css('background-color', '#80b771')
-      }
-    }
-  })
-
+    minutes = dateObj.getUTCMinutes();
+    seconds = dateObj.getSeconds();
+    let timeString = minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0');
+    console.log(timeString);
+    clockTimer.textContent = timeString;
+  }, 1000);
 }
 
-function startStopClock() {
-  $('.clock').on('click', function() {
-    if (startOrStop) {startTimer()}
-    else {
-      startOrStop = true
-      clearInterval(timer)
-    }
-  })
-}
-
-function startTimer(){
-  startOrStop = false
-  var screenTime = $('#clock-text').text()
-  var seconds = parseInt(screenTime.substr(screenTime.length-2))
-  var minutes = parseInt(screenTime.substr(0, screenTime.length-3))
-
-  timer = setInterval(function() {
-    // format seconds with 0 before, in case of 1 digit
-    var minutesString = minutes.toString()
-    var secondsString = seconds.toString()
-    if (secondsString.length === 1) {
-      secondsString = "0" + secondsString
-    }
-    // append changes to screen
-    $('#clock-text').html(minutesString + ":" + secondsString)
-    // decrement seconds and minutes
-    seconds -= 1
-    if (seconds === -1) {
-      seconds = 59
-      minutes -= 1
-    }
-    if (minutes === -1) {
-      clearInterval(timer)
-      alarm()
-      if (work) {
-        breakTime()
-        $('.clock').css('background-color', '#b57570')
-      }
-      else {
-        workTime()
-        $('.clock').css('background-color', '#80b771')
-      }
-    }
-  }, 1000)
-}
-
-function breakTime() {
-  var time = $('.break .modifiers-time').text()
-  $('#clock-text').html(time + ":00")
-  work = false
-  startTimer()
-}
-
-function workTime() {
-  var time = $('.session .modifiers-time').text()
-  $('#clock-text').html(time + ":00")
-  work = true
-  startTimer()
-}
-
-function alarm() {
-  var x = new Audio('./sounds/analog.mp3')
-  x.play()
-}
+startIcon.addEventListener('click', startClock);
